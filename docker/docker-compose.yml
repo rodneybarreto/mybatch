@@ -1,0 +1,22 @@
+services:
+    mybatchdb-serv:
+        image: mariadb:10.11
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            - MARIADB_DATABASE=mybatchdb
+            - MARIADB_USER=mybatchuser
+            - MARIADB_PASSWORD=mybatchpass
+            - MARIADB_ROOT_PASSWORD=admin@123
+            - TZ=America/Sao_Paulo
+        volumes:
+            - /home/rodney/databases/mariadb/mybatch-api:/var/lib/mysql
+        expose:
+            - 3306
+        networks:
+            - mybatch-net
+
+networks:
+    mybatch-net:
+        driver: bridge
