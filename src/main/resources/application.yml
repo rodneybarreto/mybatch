@@ -1,6 +1,10 @@
 spring:
     application:
         name: mybatch
+    config:
+        import: optional:file:.env[.properties]
+    profiles:
+        active: dev
     datasource:
         jdbcUrl: jdbc:h2:mem:springdb;DB_CLOSE_DELAY=-1
         username: sa

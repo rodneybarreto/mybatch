@@ -17,7 +17,7 @@ public class MyBatchWriter {
     public ItemWriter<Customer> writer(@Qualifier("appDS") DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Customer>()
                 .dataSource(dataSource)
-                .sql("INSERT INTO customer (name, email, pix_key) VALUES (:name, :email, :pixKey)")
+                .sql("INSERT INTO customer (name, email, pix_key, pix_key_encrypted) VALUES (:name, :email, :pixKey, :pixKeyEncrypted)")
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
                 .build();
     }
