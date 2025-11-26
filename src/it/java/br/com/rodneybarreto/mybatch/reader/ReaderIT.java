@@ -1,4 +1,4 @@
-package br.com.rodneybarreto.mybatch;
+package br.com.rodneybarreto.mybatch.reader;
 
 import br.com.rodneybarreto.mybatch.domain.Customer;
 import org.junit.jupiter.api.Test;

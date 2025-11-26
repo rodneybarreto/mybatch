@@ -1,5 +1,6 @@
-package br.com.rodneybarreto.mybatch;
+package br.com.rodneybarreto.mybatch.step;
 
+import br.com.rodneybarreto.mybatch.enums.SchemaEnum;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @SpringBatchTest
 @ActiveProfiles("test")
-class JobIT {
+class StepConfigIT {
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
@@ -37,23 +38,12 @@ class JobIT {
     @BeforeEach
     void before() {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.jdbcTemplate.execute("""
-            create table CUSTOMER (
-                id bigint not null auto_increment,
-                name varchar(255) not null,
-                email varchar(255) not null,
-                pix_key varchar(255),
-                pix_key_encrypted varchar(255),
-                pix_key_open varchar(255),
-                primary key(id),
-                unique(email)
-            );
-        """);
+        this.jdbcTemplate.execute(SchemaEnum.CREATE_TABLE_CUSTOMER.getSql());
     }
 
     @Test
-    void testJob() throws Exception {
-        JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+    void testStep() {
+        JobExecution jobExecution = jobLauncherTestUtils.launchStep("step");
         assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
 
         StepExecution stepExecution = jobExecution.getStepExecutions().iterator().next();
@@ -62,10 +52,9 @@ class JobIT {
         assertEquals(15, stepExecution.getWriteCount());
     }
 
-
     @AfterEach
-    void affter() {
-        this.jdbcTemplate.execute("drop table CUSTOMER");
+    void after() {
+        this.jdbcTemplate.execute(SchemaEnum.DROP_TABLE_CUSTOMER.getSql());
     }
 
 }
