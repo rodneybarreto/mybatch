@@ -16,8 +16,18 @@ public class Processor {
     @Bean
     public ItemProcessor<Customer, Customer> process() {
         return customer -> {
-            customer.setPixKeyEncrypted(aesHelper.encrypt(this.clean(customer.getPixKey())));
-            return customer;
+            String clean = this.clean(customer.getPixKey());
+            String encrypted = aesHelper.encrypt(clean);
+            String decrypted = aesHelper.decrypt(encrypted);
+
+            return Customer.builder()
+                    .id(customer.getId())
+                    .name(customer.getName())
+                    .email(customer.getEmail())
+                    .pixKey(customer.getPixKey())
+                    .pixKeyEncrypted(encrypted)
+                    .pixKeyOpen(decrypted)
+                    .build();
         };
     }
 

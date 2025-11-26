@@ -17,7 +17,10 @@ public class Writer {
     public ItemWriter<Customer> write(@Qualifier("appDS") DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Customer>()
                 .dataSource(dataSource)
-                .sql("INSERT INTO customer (name, email, pix_key, pix_key_encrypted) VALUES (:name, :email, :pixKey, :pixKeyEncrypted)")
+                .sql("""
+                    INSERT INTO customer (name, email, pix_key, pix_key_encrypted, pix_key_open)
+                    VALUES (:name, :email, :pixKey, :pixKeyEncrypted, :pixKeyOpen)
+                """)
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
                 .build();
     }

@@ -44,6 +44,7 @@ class StepConfigIT {
                 email varchar(255) not null,
                 pix_key varchar(255),
                 pix_key_encrypted varchar(255),
+                pix_key_open varchar(255),
                 primary key(id),
                 unique(email)
             );

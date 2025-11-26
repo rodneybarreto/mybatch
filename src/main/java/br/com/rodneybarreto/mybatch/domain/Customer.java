@@ -28,4 +28,7 @@ public class Customer {
     @Column(name = "pix_key_encrypted")
     private String pixKeyEncrypted;
 
+    @Column(name = "pix_key_open")
+    private String pixKeyOpen;
+
 }
