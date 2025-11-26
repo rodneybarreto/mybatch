@@ -1,0 +1,18 @@
+spring:
+    datasource:
+        jdbcUrl: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+        username: sa
+        password: sa
+        driver-class-name: org.h2.Driver
+    h2:
+        console:
+            enabled: false
+    app:
+        datasource:
+            jdbcUrl: jdbc:h2:file:./src/it/resources/data/mybatchdb;DB_CLOSE_DELAY=-1;MODE=MYSQL
+            username: mybatchuser
+            password: mybatchpass
+            driver-class-name: org.h2.Driver
+    batch:
+        job:
+            enabled: false
