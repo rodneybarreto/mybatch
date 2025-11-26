@@ -22,7 +22,7 @@ public class DataSourceConfig {
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "app.datasource")
+    @ConfigurationProperties(prefix = "spring.app.datasource")
     public DataSource appDS() {
         return DataSourceBuilder.create().build();
     }

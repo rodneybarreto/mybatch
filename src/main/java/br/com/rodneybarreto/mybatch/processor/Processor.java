@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class MyBatchProcessor {
+public class Processor {
 
     private final AESHelper aesHelper;
 
     @Bean
-    public ItemProcessor<Customer, Customer> processor() {
+    public ItemProcessor<Customer, Customer> process() {
         return customer -> {
             customer.setPixKeyEncrypted(aesHelper.encrypt(this.clean(customer.getPixKey())));
             return customer;

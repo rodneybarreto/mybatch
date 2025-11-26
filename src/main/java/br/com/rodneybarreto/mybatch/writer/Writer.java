@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-public class MyBatchWriter {
+public class Writer {
 
     @Bean
-    public ItemWriter<Customer> writer(@Qualifier("appDS") DataSource dataSource) {
+    public ItemWriter<Customer> write(@Qualifier("appDS") DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Customer>()
                 .dataSource(dataSource)
                 .sql("INSERT INTO customer (name, email, pix_key, pix_key_encrypted) VALUES (:name, :email, :pixKey, :pixKeyEncrypted)")

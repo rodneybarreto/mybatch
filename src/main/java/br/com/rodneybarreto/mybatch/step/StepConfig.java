@@ -22,7 +22,12 @@ public class StepConfig {
     }
 
     @Bean
-    public Step step(JobRepository jobRepository, ItemReader<Customer> reader, ItemProcessor<Customer, Customer> processor, ItemWriter<Customer> writer) {
+    public Step step(
+            JobRepository jobRepository,
+            ItemReader<Customer> reader,
+            ItemProcessor<Customer, Customer> processor,
+            ItemWriter<Customer> writer
+    ) {
         return new StepBuilder("step", jobRepository).
                 <Customer, Customer>chunk(10, transactionManagerApp)
                 .reader(reader)
