@@ -52,7 +52,6 @@ class JobIT {
         assertEquals(15, stepExecution.getWriteCount());
     }
 
-
     @AfterEach
     void after() {
         this.jdbcTemplate.execute(SchemaEnum.DROP_TABLE_CUSTOMER.getSql());
